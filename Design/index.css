@@ -1,0 +1,61 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#rightHalf{
+	width: 50vw;
+	height: 100vh;
+	background: rgba(53, 120, 229, 1);
+	float: right;
+	text-align: center;
+}
+
+#frmLogin{
+	text-align: center;
+	color: rgba(53, 120, 229, 1);
+}
+
+.inputs{
+	border: none;
+	height: 5vh;
+	width: 14vw;
+	border-left: 8px solid rgba(53, 120, 229, 1);
+	box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+}
+
+.inputsWrong{
+	border: none;
+	height: 5vh;
+	width: 14vw;
+	border-left: 8px solid rgba(255, 0, 0, 1);
+	box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+}
+
+.inputs:focus{
+	background: rgba(255, 255, 153, 1);
+	outline: none;
+	color: rgba(53, 120, 229, 1);
+}
+
+.inputsWrong:focus{
+	background: rgba(255, 255, 153, 1);
+	outline: none;
+	color: rgba(53, 120, 229, 1);
+}
+
+.buttons{
+	width: 15vw;
+	height: 5vh;
+	border: none;
+	box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+	color: rgba(255, 255, 255, 1);
+	background-color: rgba(53, 120, 229, 1);
+}
+
+.buttons:hover{
+	color: rgba(53, 120, 229, 1);
+	background-color: rgba(255, 255, 255, 1);
+}

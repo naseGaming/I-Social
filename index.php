@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="Design/index.css" />
+		<script src="https://kit.fontawesome.com/8b6b1fa9e8.js" crossorigin="anonymous"></script>
+        <script src = "Scripts/jquery-3.1.1.min.js"></script>
+        <script src = "Scripts/jquery-ui.min.js"></script>
+		<script src = "Scripts/index.js" ></script>
+	</head>
+	<body>
+		<div id = "rightHalf" >
+			<h1>Welcome to ISocial</h1>
+		</div>
+		<div id = "frmLogin" >
+			<br>
+			<h1 id = "head"><i class="fa fa-sign-in"></i> Sign in</h1>
+			<input type = "text" class = "inputs" id = "username" placeholder = "Username" />
+			<br>
+			<br>
+			<input type = "password" class = "inputs" id = "password" placeholder = "Password" />
+			<p id = "err"  ></p>
+			<br>
+			<button class = "buttons" id = "login" type = "button"><i class="fa fa-sign-in"></i> Sign in</button>
+		</div>
+		<div id = "frmRegister" >
+			<br>
+			<h1 id = "head"><i class="fa fa-save"></i> Sign up</h1>
+			<input type = "text" class = "inputs" id = "regUsername" placeholder = "Username" />
+			<br>
+			<br>
+			<input type = "password" class = "inputs" id = "regPassword" placeholder = "Password" />
+			<br>
+			<br>
+			<input type = "password" class = "inputs" id = "regConPass" placeholder = "Confirm Password" />
+			<br>
+			<br>
+			<input type = "text" class = "inputs" id = "regFirst" placeholder = "First Name" />
+			<br>
+			<br>
+			<input type = "text" class = "inputs" id = "regMid" placeholder = "Middle Name" />
+			<br>
+			<br>
+			<input type = "text" class = "inputs" id = "regLast" placeholder = "Last Name" />
+			<p id = "errR"  ></p>
+			<br>
+			<button class = "buttons" id = "register" type = "button"><i class="fa fa-save"></i> Sign up</button>
+		</div>
+	</body>
+</html>
