@@ -18,6 +18,11 @@ html, body {
 	color: rgba(53, 120, 229, 1);
 }
 
+#frmRegister{
+	text-align: center;
+	color: rgba(53, 120, 229, 1);
+}
+
 .inputs{
 	border: none;
 	height: 5vh;
@@ -58,4 +63,17 @@ html, body {
 .buttons:hover{
 	color: rgba(53, 120, 229, 1);
 	background-color: rgba(255, 255, 255, 1);
+}
+
+img{
+	width: 40vw;
+	height: 80vh;
+}
+
+.link{
+	cursor: pointer;
+}
+
+.link:hover{
+	color: rgba(0, 0, 0, 1);
 }
