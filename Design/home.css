@@ -1,0 +1,66 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#body{
+	position:absolute;
+	height: 100vh;
+	width: 100vw;
+}
+
+#left-bar{
+	width: 20%;
+	height: 100vh;
+	background: rgba(53, 120, 229, 1);
+	float: left;
+	text-align: center;
+    margin: 0;
+}
+
+#top-bar{
+	width: 60%;
+	height: 30vh;
+	background: rgba(255, 255, 255, 1);
+	float: left;
+	text-align: center;
+    margin: 0;
+  	box-shadow: 5px 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+#right-bar{
+	width: 20%;
+	height: 100vh;
+	background: rgba(53, 120, 229, 1);
+	float: left;
+	text-align: center;
+    margin: 0;
+}
+
+.postText{
+	width: 99%;
+	height: 20vh;
+	border:none;
+	border-bottom: 2px solid rgba(53, 120, 229, 1);
+	resize: none;
+	outline: none;
+	font-size: 4vh;
+}
+
+.postBtn{
+	width: 10%;
+	height: 8vh;
+	margin-right: 2px;
+	float: right;
+	background: rgba(255, 255, 255, 1);
+	color: rgba(53, 120, 229, 1);
+	border: none;
+    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+}
+
+.postBtn:hover{
+	background: rgba(53, 120, 229, 1);
+	color: rgba(255, 255, 255, 1);
+}
