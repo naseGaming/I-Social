@@ -38,13 +38,13 @@
 		<div id = "frmRegister" >
 			<br>
 			<h1 id = "head"><i class="fa fa-save"></i> Sign up</h1>
-			<input type = "text" class = "inputs" id = "regUsername" placeholder = "Username" />
+			<input type = "text" class = "inputs" id = "regUser" placeholder = "Username" />
 			<br>
 			<br>
-			<input type = "password" class = "inputs" id = "regPassword" placeholder = "Password" />
+			<input type = "password" class = "inputs" id = "regPass" placeholder = "Password" />
 			<br>
 			<br>
-			<input type = "password" class = "inputs" id = "regConPass" placeholder = "Confirm Password" />
+			<input type = "password" class = "inputs" id = "regConf" placeholder = "Confirm Password" />
 			<br>
 			<br>
 			<input type = "text" class = "inputs" id = "regFirst" placeholder = "First Name" />
@@ -54,6 +54,9 @@
 			<br>
 			<br>
 			<input type = "text" class = "inputs" id = "regLast" placeholder = "Last Name" />
+			<br>
+			<br>
+			<input type = "text" class = "inputs" id = "regEmail" placeholder = "Email" />
 			<br>
 			<br>
 			<a id = "log" class = "link"><u>Have an Account?</u></a>
