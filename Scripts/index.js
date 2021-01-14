@@ -87,7 +87,7 @@ class Model{
 	loginProcess(loginUser, loginPass){
         return $.ajax({
 			type: "POST",
-			url: '/ISocial/Process/signIn.php/',
+			url: '/ISocial/Process/signIn.php',
 			data: jQuery.param({ user: loginUser, pass: loginPass }),
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			success: function (responses) {
@@ -100,7 +100,7 @@ class Model{
 	registerProcess(user, pass, first, mid, last, email){
 		return $.ajax({
 			type: "POST",
-			url: '/ISocial/Process/signUp.php/',
+			url: '/ISocial/Process/signUp.php',
 			data: jQuery.param({ user: user, pass: pass, first: first, mid: mid, last: last, email: email }),
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			success: function (responses) {  
