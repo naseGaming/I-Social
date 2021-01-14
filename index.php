@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="Design/favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="Design/index.css" />
 		<script src="https://kit.fontawesome.com/8b6b1fa9e8.js" crossorigin="anonymous"></script>
@@ -12,6 +13,9 @@
 	<body>
 		<div id = "rightHalf" >
 			<h1>Welcome to ISocial</h1>
+			<img src = "Design/favicon.png" alt = "ISocial Icon" />
+			<br>
+			<a>We Connect</a>
 		</div>
 		<div id = "frmLogin" >
 			<br>
@@ -20,6 +24,13 @@
 			<br>
 			<br>
 			<input type = "password" class = "inputs" id = "password" placeholder = "Password" />
+			<br>
+			<br>
+			<a id = "forget" class = "link"><u>Forget Password?</u></a>
+			<br>
+			<br>
+			<a id = "create" class = "link"><u>Don't Have an Account?</u></a>
+			<br>
 			<p id = "err"  ></p>
 			<br>
 			<button class = "buttons" id = "login" type = "button"><i class="fa fa-sign-in"></i> Sign in</button>
@@ -43,6 +54,10 @@
 			<br>
 			<br>
 			<input type = "text" class = "inputs" id = "regLast" placeholder = "Last Name" />
+			<br>
+			<br>
+			<a id = "log" class = "link"><u>Have an Account?</u></a>
+			<br>
 			<p id = "errR"  ></p>
 			<br>
 			<button class = "buttons" id = "register" type = "button"><i class="fa fa-save"></i> Sign up</button>
