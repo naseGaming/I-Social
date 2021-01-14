@@ -21,6 +21,13 @@ $(document).ready(function () {
 		$("#frmLogin").show();
     });
 
+    $("#login").click(function () {
+        controller.logUser = document.getElementById("username").value;
+        controller.logPass = document.getElementById("password").value;
+
+        controller.login(model ,view)
+    });
+
     $("#register").click(function () {
         controller.regUser = document.getElementById("regUser").value;
         controller.regPass = document.getElementById("regPass").value;
@@ -62,9 +69,34 @@ class View{
     success(data, field){
 		document.getElementById(""+field).innerHTML = data;
     }
+
+    logError(data, field){
+		document.getElementById("err").innerHTML = data;
+		document.getElementById(""+field).innerHTML = "";
+        $("#"+field).removeClass().addClass('inputsWrong');
+    }
+
+    login(){
+        $("#username").removeClass().addClass('inputs');
+        $("#password").removeClass().addClass('inputs');
+        location.href = "../ISocial/Home.php";
+    }
 }
 
 class Model{
+	loginProcess(loginUser, loginPass){
+        return $.ajax({
+			type: "POST",
+			url: '/ISocial/Process/signIn.php/',
+			data: jQuery.param({ user: loginUser, pass: loginPass }),
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			success: function (responses) {
+			},
+			error: function () {
+			}
+		});
+	}
+
 	registerProcess(user, pass, first, mid, last, email){
 		return $.ajax({
 			type: "POST",
@@ -80,7 +112,7 @@ class Model{
 }
 
 class Controller{
-	constructor(regUser, regPass, regConf, regFirst, regMid, regLast, regEmail, validChars, validEmail, validName, flag){
+	constructor(regUser, regPass, regConf, regFirst, regMid, regLast, regEmail, validChars, validEmail, validName, flag, logUser, logPass){
 		this.regUser = regUser;
 		this.regPass = regPass;
 		this.regConf = regConf;
@@ -92,6 +124,25 @@ class Controller{
         this.validName = /^[A-Z a-z]+$/;
         this.validEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,63}$/;
 		this.flag = false;
+		this.logUser = logUser;
+		this.logPass = logPass;
+	}
+
+	login(model, view){
+		$.when(model.loginProcess(this.logUser, this.logPass)).done(function (result) {
+            if (result == "pass") {
+                //incorrect password
+                view.logError("Incorrect Password!", "password");
+            }
+            else if (result == "user") {
+                //username does not exist
+                view.logError("Username does not exist!", "username");
+            }
+            else {
+                //succesful login
+                view.login();
+            }
+        });
 	}
 
 	register(model, view){
