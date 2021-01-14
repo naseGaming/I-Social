@@ -11,59 +11,61 @@
 		<script src = "Scripts/index.js" ></script>
 	</head>
 	<body>
-		<div id = "rightHalf" >
-			<h1>Welcome to ISocial</h1>
-			<img src = "Design/favicon.png" alt = "ISocial Icon" />
-			<br>
-			<a>We Connect</a>
-		</div>
-		<div id = "frmLogin" >
-			<br>
-			<h1 id = "head"><i class="fa fa-sign-in"></i> Sign in</h1>
-			<input type = "text" class = "inputs" id = "username" placeholder = "Username" />
-			<br>
-			<br>
-			<input type = "password" class = "inputs" id = "password" placeholder = "Password" />
-			<br>
-			<br>
-			<a id = "forget" class = "link"><u>Forget Password?</u></a>
-			<br>
-			<br>
-			<a id = "create" class = "link"><u>Don't Have an Account?</u></a>
-			<br>
-			<p id = "err"  ></p>
-			<br>
-			<button class = "buttons" id = "login" type = "button"><i class="fa fa-sign-in"></i> Sign in</button>
-		</div>
-		<div id = "frmRegister" >
-			<br>
-			<h1 id = "head"><i class="fa fa-save"></i> Sign up</h1>
-			<input type = "text" class = "inputs" id = "regUser" placeholder = "Username" />
-			<br>
-			<br>
-			<input type = "password" class = "inputs" id = "regPass" placeholder = "Password" />
-			<br>
-			<br>
-			<input type = "password" class = "inputs" id = "regConf" placeholder = "Confirm Password" />
-			<br>
-			<br>
-			<input type = "text" class = "inputs" id = "regFirst" placeholder = "First Name" />
-			<br>
-			<br>
-			<input type = "text" class = "inputs" id = "regMid" placeholder = "Middle Name" />
-			<br>
-			<br>
-			<input type = "text" class = "inputs" id = "regLast" placeholder = "Last Name" />
-			<br>
-			<br>
-			<input type = "text" class = "inputs" id = "regEmail" placeholder = "Email" />
-			<br>
-			<br>
-			<a id = "log" class = "link"><u>Have an Account?</u></a>
-			<br>
-			<p id = "errR"  ></p>
-			<br>
-			<button class = "buttons" id = "register" type = "button"><i class="fa fa-save"></i> Sign up</button>
+		<div id ="body" >
+			<div id = "rightHalf" >
+				<h1>Welcome to ISocial</h1>
+				<img src = "Design/favicon.png" alt = "ISocial Icon" />
+				<br>
+				<a>We Connect</a>
+			</div>
+			<div id = "frmLogin" >
+				<br>
+				<h1 id = "head"><i class="fa fa-sign-in"></i> Sign in</h1>
+				<input type = "text" class = "inputs" id = "username" placeholder = "Username" />
+				<br>
+				<br>
+				<input type = "password" class = "inputs" id = "password" placeholder = "Password" />
+				<br>
+				<br>
+				<a id = "forget" class = "link"><u>Forget Password?</u></a>
+				<br>
+				<br>
+				<a id = "create" class = "link"><u>Don't Have an Account?</u></a>
+				<br>
+				<p id = "err"  ></p>
+				<br>
+				<button class = "buttons" id = "login" type = "button"><i class="fa fa-sign-in"></i> Sign in</button>
+			</div>
+			<div id = "frmRegister" >
+				<br>
+				<h1 id = "head"><i class="fa fa-save"></i> Sign up</h1>
+				<input type = "text" class = "inputs" id = "regUser" placeholder = "Username" />
+				<br>
+				<br>
+				<input type = "password" class = "inputs" id = "regPass" placeholder = "Password" />
+				<br>
+				<br>
+				<input type = "password" class = "inputs" id = "regConf" placeholder = "Confirm Password" />
+				<br>
+				<br>
+				<input type = "text" class = "inputs" id = "regFirst" placeholder = "First Name" />
+				<br>
+				<br>
+				<input type = "text" class = "inputs" id = "regMid" placeholder = "Middle Name" />
+				<br>
+				<br>
+				<input type = "text" class = "inputs" id = "regLast" placeholder = "Last Name" />
+				<br>
+				<br>
+				<input type = "text" class = "inputs" id = "regEmail" placeholder = "Email" />
+				<br>
+				<br>
+				<a id = "log" class = "link"><u>Have an Account?</u></a>
+				<br>
+				<p id = "errR"  ></p>
+				<br>
+				<button class = "buttons" id = "register" type = "button"><i class="fa fa-save"></i> Sign up</button>
+			</div>
 		</div>
 	</body>
 </html>
