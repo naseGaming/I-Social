@@ -38,15 +38,15 @@ $(document).ready(function () {
 });
 
 class View{
-	empty(data, object){
+	empty(data, field){
 		document.getElementById("errR").innerHTML = data;
-        $("#"+object).removeClass().addClass('inputsWrong');
+        $("#"+field).removeClass().addClass('inputsWrong');
 	}
 
-	error(data, object){
+	error(data, field){
 		document.getElementById("errR").innerHTML = data;
-		document.getElementById(object).innerHTML = "";
-        $("#"+object).removeClass().addClass('inputsWrong');
+		document.getElementById(""+field).innerHTML = "";
+        $("#"+field).removeClass().addClass('inputsWrong');
     }
 
     noerror(){
@@ -59,8 +59,8 @@ class View{
         $("#regEmail").removeClass().addClass('inputs');
     }
 
-    success(data, object){
-		document.getElementById(object).innerHTML = data;
+    success(data, field){
+		document.getElementById(""+field).innerHTML = data;
     }
 }
 
@@ -68,7 +68,7 @@ class Model{
 	registerProcess(user, pass, first, mid, last, email){
 		return $.ajax({
 			type: "POST",
-			url: '/IdleGame/Process/signUp.php/',
+			url: '/ISocial/Process/signUp.php/',
 			data: jQuery.param({ user: user, pass: pass, first: first, mid: mid, last: last, email: email }),
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			success: function (responses) {  
@@ -96,15 +96,18 @@ class Controller{
 
 	register(model, view){
 		$.when(model.registerProcess(this.regUser, this.regPass, this.regFirst, this.regMid, this.regLast, this.regEmail)).done(function (result){
-			if(result === 0){
-				view.error("Username Already Exist!");
+			if(result == "User" ){
+				view.error("Username Already Exist!", "regUser");
 			}
-			else if(result === 1){
-				view.error("Email Already Exist!");
+			else if(result == "Email"){
+				view.error("Email Already Exist!", "regEmail");
 			}
-			else{
+			else if(result == "Go"){
 				view.noerror();
 				view.success("Registeration Complete!", "errR");
+			}
+			else{ 
+				view.error(result, "regUser");
 			}
 		});
 	}
@@ -152,12 +155,12 @@ class Controller{
 				this.flag = false;
 				view.error("Name should not contain symbols and numbers!", "regLast");
 			}
-			else if(!this.regEmail.match(this.validName)){
+			else if(!this.regEmail.match(this.validEmail)){
 				this.flag = false;
 				view.error("Invalid Email!", "regEmail");
 			}
 			else{
-				if(this.regPass == this.regConf){
+				if(!this.regPass == this.regConf){
 					this.flag = false;
 					view.error("Password does not match!", "regConf");
 				}
