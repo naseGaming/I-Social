@@ -96,10 +96,10 @@ class Controller{
 
 	register(model, view){
 		$.when(model.registerProcess(this.regUser, this.regPass, this.regFirst, this.regMid, this.regLast, this.regEmail)).done(function (result){
-			if(result === "0"){
+			if(result === 0){
 				view.error("Username Already Exist!");
 			}
-			else if(result === "1"){
+			else if(result === 1){
 				view.error("Email Already Exist!");
 			}
 			else{
