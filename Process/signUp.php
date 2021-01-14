@@ -112,13 +112,13 @@
 			}	
 		   
 			fwrite($myFile,$xmlContent);
-			echo 2;
+			echo "Go";
 		}
 		else{
-			echo 1;
+			echo "Email";
 		}
 	}
 	else{
-		echo 0;
+		echo "User";
 	}
 ?>
