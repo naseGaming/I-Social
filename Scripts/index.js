@@ -26,9 +26,13 @@ $(document).ready(function () {
         controller.logUser = document.getElementById("username").value;
         controller.logPass = document.getElementById("password").value;
 
+        //checks if inputs are empty
         controller.checkLogin(view);
+        //generates code to use if necessary
         controller.codeGenerator();
+        //puts the code to its right input box automatically
         document.getElementById("userCode").value = controller.code;
+        //calls the method for login
         if(controller.valid){
         	controller.login(model ,view);
         }
@@ -43,7 +47,9 @@ $(document).ready(function () {
         controller.regLast = document.getElementById("regLast").value;
         controller.regEmail = document.getElementById("regEmail").value;
 
+        //checks if inputs are empty
         controller.checkInput(view);
+        //calls the method for register
         if(controller.flag){
         	controller.register(model, view);
         }    
@@ -52,23 +58,27 @@ $(document).ready(function () {
     $("#verify").click(function () {
     	controller.logCode = document.getElementById("userCode").value;
 
+    	//calls the method for verifying the user
     	controller.verifyUser(model, view);
     });
 });
 
 class View{
 	empty(data, field){
+		//prints error when inputs are empty
 		document.getElementById("errR").innerHTML = data;
         $("#"+field).removeClass().addClass('inputsWrong');
 	}
 
 	error(data, field){
+		//prints error when inputs contains invalid characters
 		document.getElementById("errR").innerHTML = data;
 		document.getElementById(""+field).innerHTML = "";
         $("#"+field).removeClass().addClass('inputsWrong');
     }
 
     noerror(){
+    	//removes all error indicator
         $("#regUser").removeClass().addClass('inputs');
         $("#regPass").removeClass().addClass('inputs');
         $("#regConf").removeClass().addClass('inputs');
@@ -79,37 +89,44 @@ class View{
     }
 
     success(data, field){
+    	//prints success
 		document.getElementById(""+field).innerHTML = data;
     }
 
     logError(data, field){
+    	//prints if login credentials are empty
 		document.getElementById("err").innerHTML = data;
 		document.getElementById(""+field).innerHTML = "";
         $("#"+field).removeClass().addClass('inputsWrong');
     }
 
     internalError(data){
+    	//prints other internal scripts error
 		document.getElementById("err").innerHTML = data;
     }
 
     login(){
+    	//log in if credentials are right
         $("#username").removeClass().addClass('inputs');
         $("#password").removeClass().addClass('inputs');
         location.href = "../ISocial/Home.php";
     }
 
     makeButton(){
+    	//shows the verify button if necessary
 		$("#userCode").show();
 		$("#verify").show();
     }
 
     deleteButton(){
+    	//hides the verify button
 		$("#userCode").hide();
 		$("#verify").hide();
     }
 }
 
 class Model{
+	//ajax for calling the login php file
 	loginProcess(loginUser, loginPass, code){
         return $.ajax({
 			type: "POST",
@@ -123,6 +140,7 @@ class Model{
 		});
 	}
 
+	//ajax for calling the register php file
 	registerProcess(user, pass, first, mid, last, email){
 		return $.ajax({
 			type: "POST",
@@ -136,6 +154,7 @@ class Model{
 		});
 	}
 
+	//ajax for calling the verify User php file
 	verifyUserProcess(loginUser){
         return $.ajax({
 			type: "POST",
@@ -151,6 +170,7 @@ class Model{
 }
 
 class Controller{
+	//constructor for controller class
 	constructor(regUser, regPass, regConf, regFirst, regMid, regLast, regEmail, validChars, validEmail, validName, flag, logUser, logPass, valid, code, logCode){
 		this.regUser = regUser;
 		this.regPass = regPass;
@@ -170,6 +190,7 @@ class Controller{
 		this.logCode = logCode;
 	}
 
+	//checks the values returned by the login php file
 	login(model, view){
 		$.when(model.loginProcess(this.logUser, this.logPass, this.code)).done(function (result) {
             if (result == "Pass") {
@@ -196,6 +217,7 @@ class Controller{
         });
 	}
 
+	//checks the values returned by the register php file
 	register(model, view){
 		$.when(model.registerProcess(this.regUser, this.regPass, this.regFirst, this.regMid, this.regLast, this.regEmail)).done(function (result){
 			if(result == "User" ){
@@ -218,6 +240,7 @@ class Controller{
 		});
 	}
 
+	//checks if login input boxes are empty
 	checkLogin(view){
 		if(this.ifEmpty(this.logUser)){
 			this.valid = false;
@@ -232,6 +255,7 @@ class Controller{
 		}
 	}
 
+	//checks if register input boxes are empty or has invalid characters on it
 	checkInput(view){
 		view.noerror();
 		if(this.ifEmpty(this.regUser)){
@@ -292,6 +316,7 @@ class Controller{
 		}
 	}
 
+	//checks if input boxes has an empty value on it
 	ifEmpty(data){
 		if(data === ""){
 			return true;
@@ -301,6 +326,7 @@ class Controller{
 		}
 	}
 
+	//generates the code for verifying the user
 	codeGenerator(){
 		let result = "";
 	    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -312,6 +338,7 @@ class Controller{
 	    this.code = result;
 	}
 
+	//checks the values returned by verify User php file
 	verifyUser(model, view){
 		if(this.code == this.logCode){
 			$.when(model.verifyUserProcess(this.logUser)).done(function (result) {
