@@ -1,10 +1,11 @@
 $(document).ready(function () {
 
-	$("#frmRegister").hide();
-
 	var view = new View;
 	var model = new Model;
 	var controller = new Controller;
+
+	$("#frmRegister").hide();
+	view.deleteButton();
 
     $("#forget").click(function () {
 		$("#frmRegister").hide();
@@ -25,7 +26,12 @@ $(document).ready(function () {
         controller.logUser = document.getElementById("username").value;
         controller.logPass = document.getElementById("password").value;
 
-        controller.login(model ,view)
+        controller.checkLogin(view);
+        controller.codeGenerator();
+        document.getElementById("userCode").value = controller.code;
+        if(controller.valid){
+        	controller.login(model ,view);
+        }
     });
 
     $("#register").click(function () {
@@ -41,6 +47,12 @@ $(document).ready(function () {
         if(controller.flag){
         	controller.register(model, view);
         }    
+    });
+
+    $("#verify").click(function () {
+    	controller.logCode = document.getElementById("userCode").value;
+
+    	controller.verifyUser(model, view);
     });
 });
 
@@ -76,19 +88,33 @@ class View{
         $("#"+field).removeClass().addClass('inputsWrong');
     }
 
+    internalError(data){
+		document.getElementById("err").innerHTML = data;
+    }
+
     login(){
         $("#username").removeClass().addClass('inputs');
         $("#password").removeClass().addClass('inputs');
         location.href = "../ISocial/Home.php";
     }
+
+    makeButton(){
+		$("#userCode").show();
+		$("#verify").show();
+    }
+
+    deleteButton(){
+		$("#userCode").hide();
+		$("#verify").hide();
+    }
 }
 
 class Model{
-	loginProcess(loginUser, loginPass){
+	loginProcess(loginUser, loginPass, code){
         return $.ajax({
 			type: "POST",
 			url: '/ISocial/Process/signIn.php',
-			data: jQuery.param({ user: loginUser, pass: loginPass }),
+			data: jQuery.param({ user: loginUser, pass: loginPass, code: code }),
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			success: function (responses) {
 			},
@@ -109,10 +135,23 @@ class Model{
 			}
 		});
 	}
+
+	verifyUserProcess(loginUser){
+        return $.ajax({
+			type: "POST",
+			url: '/ISocial/Process/verifyUser.php',
+			data: jQuery.param({ user: loginUser}),
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			success: function (responses) {
+			},
+			error: function () {
+			}
+		});
+	}
 }
 
 class Controller{
-	constructor(regUser, regPass, regConf, regFirst, regMid, regLast, regEmail, validChars, validEmail, validName, flag, logUser, logPass){
+	constructor(regUser, regPass, regConf, regFirst, regMid, regLast, regEmail, validChars, validEmail, validName, flag, logUser, logPass, valid, code, logCode){
 		this.regUser = regUser;
 		this.regPass = regPass;
 		this.regConf = regConf;
@@ -126,19 +165,31 @@ class Controller{
 		this.flag = false;
 		this.logUser = logUser;
 		this.logPass = logPass;
+		this.valid = false;
+		this.code = code;
+		this.logCode = logCode;
 	}
 
 	login(model, view){
-		$.when(model.loginProcess(this.logUser, this.logPass)).done(function (result) {
-            if (result == "pass") {
+		$.when(model.loginProcess(this.logUser, this.logPass, this.code)).done(function (result) {
+            if (result == "Pass") {
                 //incorrect password
                 view.logError("Incorrect Password!", "password");
             }
-            else if (result == "user") {
+            else if (result == "User") {
                 //username does not exist
                 view.logError("Username does not exist!", "username");
             }
-            else {
+            else if(result == "Error Sql 1") {
+            	//internal error
+                view.internalError(result);
+            }
+            else if(result == "Verify"){
+            	//verifies the user autenthicity
+            	view.makeButton();
+            	view.internalError("An Email is sent to you.");
+            }
+            else{
                 //succesful login
                 view.login();
             }
@@ -148,19 +199,37 @@ class Controller{
 	register(model, view){
 		$.when(model.registerProcess(this.regUser, this.regPass, this.regFirst, this.regMid, this.regLast, this.regEmail)).done(function (result){
 			if(result == "User" ){
+				//username already exist
 				view.error("Username Already Exist!", "regUser");
 			}
 			else if(result == "Email"){
+				//email already exist
 				view.error("Email Already Exist!", "regEmail");
 			}
 			else if(result == "Go"){
+				//succesful registration
 				view.noerror();
 				view.success("Registeration Complete!", "errR");
 			}
-			else{ 
+			else{
+				//internal error
 				view.error(result, "regUser");
 			}
 		});
+	}
+
+	checkLogin(view){
+		if(this.ifEmpty(this.logUser)){
+			this.valid = false;
+            view.logError("Username cannot be empty!", "username");
+		}
+		else if(this.ifEmpty(this.logPass)){
+			this.valid = false;
+            view.logError("Password cannot be empty!", "password");
+		}
+		else{
+			this.valid = true;
+		}
 	}
 
 	checkInput(view){
@@ -229,6 +298,33 @@ class Controller{
 		}
 		else{
 			return false;
+		}
+	}
+
+	codeGenerator(){
+		let result = "";
+	    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	    var charactersLength = characters.length;
+	    for ( var i = 0; i < 5; i++ ) {
+		   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	    }
+
+	    this.code = result;
+	}
+
+	verifyUser(model, view){
+		if(this.code == this.logCode){
+			$.when(model.verifyUserProcess(this.logUser)).done(function (result) {
+				if(result == "Success"){
+					view.deleteButton();
+				}
+				else{
+					view.internalError(result);
+				}
+			});
+		}
+		else{
+            view.internalError("Wrong Code!");
 		}
 	}
 }
