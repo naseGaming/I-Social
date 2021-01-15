@@ -29,6 +29,9 @@
 				<input type = "password" class = "inputs" id = "password" placeholder = "Password" />
 				<br>
 				<br>
+				<a id = "hiddenCode" ><input type = "text" class = "inputCode" id = "userCode" placeholder = "Code in Email" /><button id = "verify" class = "inputCodeBtn" >Verify</button></a>
+				<br>
+				<br>
 				<a id = "forget" class = "link"><u>Forget Password?</u></a>
 				<br>
 				<br>
