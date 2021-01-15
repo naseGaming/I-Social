@@ -1,4 +1,5 @@
 <?php
+	//php file for login
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\Exception;
 	session_start();
@@ -16,6 +17,7 @@
 	require 'Exception.php';
 	require 'SMTP.php';
 
+	//checks if the username is existing in the database
 	$sql = mysqli_query($con,"SELECT * FROM `users` where `Username` = '$username' ");
 
 	if($sql){
@@ -34,11 +36,14 @@
 			echo "User";
 		}
 		else{
+			//checks if the password matches
 			if (password_verify($password, $hash)){
+				//checks if the user is logged out
 				if($status === 0){
 					echo $id."/".$first."/".$last;
 				}
 				else{
+					//checks if the user device is already saved in the database
 					$sql2 = mysqli_query($con,"SELECT * FROM `login_data` where `Ip_Address` = '$ipAdd' ");
 
 					if($sql2){
@@ -51,6 +56,7 @@
 							if($id == $login_id){
 								echo $id."/".$first."/".$last;
 							}
+							//if non existent forces user to verify if it really is him
 							else{
 								//if(sendMail($email, $code)){
 									echo "Verify";
@@ -74,6 +80,7 @@
 		echo "Error Sql 1";
 	}
 
+	//function for sending mail(for future use)
 	function sendMail($email, $code){
 		$mail = new PHPMailer();
 
