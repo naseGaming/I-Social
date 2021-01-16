@@ -48,7 +48,7 @@
 
 					if($sql2){
 						while($row2 = mysqli_fetch_assoc($sql2)){
-							$login_id = $row['Users_Id'];
+							$login_id = $row2['Users_Id'];
 							$ip = true;
 						}
 
