@@ -16,7 +16,7 @@
 	$sql = mysqli_query($con,"SELECT * FROM `users` where `Username` = '$username' ");
 
 	if($sql){
-		while($row = mysqli_fetch_array($sql)){
+		while($row = mysqli_fetch_assoc($sql)){
 			$userFlag = true;
 		}
 	}
@@ -28,7 +28,7 @@
 	$sql2 = mysqli_query($con,"SELECT * FROM `users` where `Email` = '$email' ");
 
 	if($sql2){
-		while($row2 = mysqli_fetch_array($sql2)){
+		while($row2 = mysqli_fetch_assoc($sql2)){
 			$emailFlag = true;
 		}
 	}
