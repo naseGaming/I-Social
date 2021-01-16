@@ -12,7 +12,7 @@
 
 
 	if($sql){
-		while($row = mysqli_fetch_array($sql)){
+		while($row = mysqli_fetch_assoc($sql)){
 			$id = $row['Id'];
 			$flag = true;
 		}
