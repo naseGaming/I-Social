@@ -12,21 +12,35 @@
 	</head>
 	<body>
 		<div id = "left-bar" >
+			<br>
 			<div id = "profilePicture">
 			</div>
 			<br>
 			<a id = "userName" >
 			</a>
+			<br>
+			<br>
+			<ul>
+				<li class = "left-bar-items"><a class="inactives"><i class="fas fa-user-alt"></i> Profile</a></li>
+				<li class = "left-bar-items"><a class="inactives"><i class="fas fa-comments"></i> Messages</a></li>
+				<li class = "left-bar-items"><a class="inactives"><i class="fas fa-bell"></i> Notifications</a></li>
+				<li class = "left-bar-items"><a class="inactives"><i class="fas fa-cogs"></i> Settings</a></li>
+				<li class = "left-bar-items"><a class="inactives"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+			</ul>
 		</div>
-		<div id = "top-bar" >
-			<textarea id = "postText" class = "postText" rows = "4" cols = "50" placeholder = "Open up a discussion"></textarea>
-			<a>
-			<!-- 
-				<button id = "agreeBtn" class = "reactBtn" ><i id = "reacts" class="fas fa-thumbs-up"></i></button>
-				<button id = "disagreeBtn" class = "reactBtn2" ><i id = "reacts2" class="fas fa-thumbs-down"></i></button>
-			-->
-			<button id = "postBtn" class = "postBtn" >Post</button>
-			</a>
+		<div>
+			<div id = "top-bar" >
+				<textarea id = "postText" class = "postText" rows = "4" cols = "50" placeholder = "Open up a discussion"></textarea>
+				<a>
+				<!-- 
+					<button id = "agreeBtn" class = "reactBtn" ><i id = "reacts" class="fas fa-thumbs-up"></i></button>
+					<button id = "disagreeBtn" class = "reactBtn2" ><i id = "reacts2" class="fas fa-thumbs-down"></i></button>
+				-->
+				<button id = "postBtn" class = "postBtn" >Post</button>
+				</a>
+			</div>
+			<div id = "newsfeed" >
+			</div>
 		</div>
 		<div id = "right-bar" >
 		</div>
