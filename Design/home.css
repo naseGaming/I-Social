@@ -97,3 +97,12 @@ html, body {
 	height: 30vh;
 	border: 2px solid black;
 }
+
+#userName{
+	font-size: 150%;
+	cursor: pointer;
+}
+
+#userName:hover{
+	text-decoration: underline;
+}
