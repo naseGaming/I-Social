@@ -14,6 +14,7 @@
 		<div id = "left-bar" >
 			<div id = "profilePicture">
 			</div>
+			<br>
 			<a id = "userName" >
 			</a>
 		</div>
