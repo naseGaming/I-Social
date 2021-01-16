@@ -21,7 +21,7 @@
 	$sql = mysqli_query($con,"SELECT * FROM `users` where `Username` = '$username' ");
 
 	if($sql){
-		while($row = mysqli_fetch_array($sql)){
+		while($row = mysqli_fetch_assoc($sql)){
 			$id = $row['Id'];
 			$hash = $row['Password'];
 			$status = $row['Status'];
@@ -47,7 +47,7 @@
 					$sql2 = mysqli_query($con,"SELECT * FROM `login_data` where `Ip_Address` = '$ipAdd' ");
 
 					if($sql2){
-						while($row2 = mysqli_fetch_array($sql2)){
+						while($row2 = mysqli_fetch_assoc($sql2)){
 							$login_id = $row['Users_Id'];
 							$ip = true;
 						}
