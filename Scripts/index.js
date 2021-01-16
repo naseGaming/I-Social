@@ -212,6 +212,11 @@ class Controller{
             }
             else{
                 //succesful login
+				let data = result.split("/");
+
+				window.sessionStorage.setItem('id', data[0]);
+				window.sessionStorage.setItem('firstname', data[1]);
+				window.sessionStorage.setItem('lastname', data[2]);
                 view.login();
             }
         });
@@ -329,8 +334,8 @@ class Controller{
 	//generates the code for verifying the user
 	codeGenerator(){
 		let result = "";
-	    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	    var charactersLength = characters.length;
+	    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	    let charactersLength = characters.length;
 	    for ( var i = 0; i < 5; i++ ) {
 		   result += characters.charAt(Math.floor(Math.random() * charactersLength));
 	    }
