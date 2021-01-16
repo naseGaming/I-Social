@@ -14,10 +14,11 @@ html, body {
 #left-bar{
 	width: 20%;
 	height: 100vh;
-	background: rgba(53, 120, 229, 1);
+	background-image: linear-gradient(-90deg, #CF77F3 0%, #009BFF 47%, #2AC9DB 100%);
 	float: left;
 	text-align: center;
     margin: 0;
+  	box-shadow: 5px 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 #top-bar{
@@ -33,10 +34,12 @@ html, body {
 #right-bar{
 	width: 20%;
 	height: 100vh;
-	background: rgba(53, 120, 229, 1);
+	background-image: linear-gradient(-90deg, #CF77F3 0%, #009BFF 47%, #2AC9DB 100%);
 	float: left;
 	text-align: center;
     margin: 0;
+    margin-top: -30vh;
+  	box-shadow: 5px 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .postText{
@@ -54,15 +57,16 @@ html, body {
 	height: 8vh;
 	margin-right: 2px;
 	float: right;
-	background: rgba(255, 255, 255, 1);
-	color: rgba(53, 120, 229, 1);
+	background-image: linear-gradient(-90deg, #CF77F3 0%, #009BFF 47%, #2AC9DB 100%);
+	color: rgba(255, 255, 255, 1);
 	border: none;
     box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+    font-size: 150%;
 }
 
 .postBtn:hover, .reactBtn:hover, .reactBtn2:hover{
-	background: rgba(53, 120, 229, 1);
-	color: rgba(255, 255, 255, 1);
+	background: rgba(255, 255, 255, 1);
+	color: rgba(53, 120, 229, 1);
 }
 
 .reactBtn{
@@ -70,8 +74,8 @@ html, body {
 	height: 8vh;
 	margin-left: 2px;
 	float: left;
-	background: rgba(255, 255, 255, 1);
-	color: rgba(53, 120, 229, 1);
+	background-image: linear-gradient(-90deg, #CF77F3 0%, #009BFF 47%, #2AC9DB 100%);
+	color: rgba(255, 255, 255, 1);
 	border: none;
     box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
 }
@@ -81,8 +85,8 @@ html, body {
 	height: 8vh;
 	margin-left: 5px;
 	float: left;
-	background: rgba(255, 255, 255, 1);
-	color: rgba(53, 120, 229, 1);
+	background-image: linear-gradient(-90deg, #CF77F3 0%, #009BFF 47%, #2AC9DB 100%);
+	color: rgba(255, 255, 255, 1);
 	border: none;
     box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
 }
@@ -101,8 +105,40 @@ html, body {
 #userName{
 	font-size: 150%;
 	cursor: pointer;
+	color: rgba(255,255,255,1);
 }
 
 #userName:hover{
 	text-decoration: underline;
+}
+
+#newsfeed{
+	width: 60%;
+	height: 70vh;
+	float: left;
+	text-align: center;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    margin:auto;
+}
+
+.left-bar-items{
+	text-align: left;
+    margin: auto;
+	background-image: linear-gradient(-90deg, #CF77F3 0%, #009BFF 47%, #2AC9DB 100%);
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	margin-bottom: 3%;
+}
+
+.inactives{
+    display: block;
+    color: rgba(255,255,255,1);
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 30px;
 }
