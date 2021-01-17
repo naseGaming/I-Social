@@ -15,7 +15,19 @@ $(document).ready(function () {
     $("#postBtn").click(function () {
     	controller.postData = document.getElementById("postText").value;
 
-    	controller.newPost(model, view);
+    	let flag = controller.verifyPostData();
+    	if(flag == true){
+    		controller.newPost(model, view);
+    	}
+    	else{
+    		controller.showError(view);
+    	}
+	});
+
+	$('#postText').keyup(function(){
+    	controller.postData = document.getElementById("postText").value;
+
+		controller.updateCharsLeft(model, view);
 	});
 });
 
@@ -38,6 +50,22 @@ class HomeView{
 
 	showPosts(data){
 		document.getElementById("newsfeed").innerHTML = data;
+	}
+
+	disablePostBtn(){
+		$('#postBtn').attr('disabled','disabled');
+		$("#postBtn").removeClass().addClass('disabled');
+		$("#charactersLeft").removeClass().addClass('charactersLeftError');
+	}
+
+	enableBtn(){
+    	$('#postBtn').removeAttr('postBtn');
+		$("#postBtn").removeClass().addClass('postBtn');
+		$("#charactersLeft").removeClass().addClass('charactersLeft');
+	}
+
+	showRemainingNumber(data){
+		document.getElementById("charactersLeft").innerHTML = data;
 	}
 }
 
@@ -97,13 +125,28 @@ class HomeModel{
 			}
 		});
 	}
+
+	deletePostProcess(id){
+        return $.ajax({
+			type: "POST",
+			url: '/ISocial/Process/deletePost.php',
+			data: jQuery.param({ id: id}),
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			success: function (responses) {
+			},
+			error: function () {
+			}
+		});
+	}
 }
 
 class HomeController{
-	constructor(name, id, postData){
+	constructor(name, id, postData, charResult, postId){
 		this._name = name;
 		this._id = id;
 		this.postData = postData;
+		this._charResult = charResult;
+		this.postId = postId;
 	}
 
 	showName(model, view){
@@ -151,7 +194,52 @@ class HomeController{
 			view.showPosts(result);
 		});
 	}
+
+	verifyPostData(){
+		if(this.postData.length > 255){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
+	showError(view){
+		view.disablePostBtn();
+	}
+
+	updateCharsLeft(model, view){
+		this._charResult = 255 - this.postData.length;
+
+		if(this._charResult >= 0){
+			view.showRemainingNumber(this._charResult);
+			view.enableBtn();
+		}
+		else{
+			view.showRemainingNumber(this._charResult);
+			view.disablePostBtn();
+		}
+	}
+
+	deletePost(model, view){
+		$.when(model.deletePostProcess(this.postId)).done(function (result){
+			view.logError(result);
+		});
+		$.when(model.getPostsProcess(this._id)).done(function (result){
+			view.showPosts(result);
+		});
+	}
 }
 
 function goProfile(app){
+}
+
+function deletePost(app){
+	var view = new HomeView;
+	var model = new HomeModel;
+	var controller = new HomeController;
+
+	controller.postId = app.id;
+
+	controller.deletePost(model, view);
 }
