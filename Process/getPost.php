@@ -30,14 +30,11 @@
 					<div class = 'userName'>
 						<img class = 'usersPicture' src = 'Design/Resources/Default.png' alt = '".$first."-".$last."' >
 						<a class = 'aName' onClick = 'goProfile(this);' id = ".$row2["Post_Sender"].">".$first." ".$last."</a> 
-						<button class = 'editBtn' id = ".$row2['Post_Id'].">
-							<i class='fas fa-edit'></i>
-						</button>
-						<button onClick = 'deletePost(this);' name = ".$row2['Post_Sender']." class = 'deleteBtn' id = ".$row2['Post_Id'].">
+						<button onClick = 'deletePost(this);' class = 'deleteBtn' id = ".$row2['Post_Id'].">
 							<i class='fas fa-trash'></i>
 						</button>
 					</div>
-					<div class = 'postData'>
+					<div id = '".$row2['Post_Id']."-text' class = 'postData'>
 						".$row2['Post_Data']."
 					</div>
 					<button id = 'agreeBtn' class = 'reactBtn' >
