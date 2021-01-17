@@ -80,6 +80,19 @@ button{
     font-size: 150%;
 }
 
+.disabled{
+	width: 10%;
+	height: 8vh;
+	margin-right: 2px;
+	float: right;
+	background: rgba(255, 255, 255, 1);
+	color: rgba(255, 1, 1, 1);
+	border: none;
+    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+    font-size: 150%;
+    text-decoration: line-through;
+}
+
 .postBtn:hover, .reactBtn:hover, .reactBtn2:hover{
 	background: rgba(255, 255, 255, 1);
 	color: rgba(53, 120, 229, 1);
@@ -98,6 +111,18 @@ button{
 }
 
 .reactBtn2{
+	width: 10%;
+	height: 8vh;
+	margin-top: 1vh;
+	margin-left: 5px;
+	float: left;
+	background-image: linear-gradient(-90deg, #CF77F3 0%, #009BFF 47%, #2AC9DB 100%);
+	color: rgba(255, 255, 255, 1);
+	border: none;
+    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+}
+
+.replyBtn{
 	width: 10%;
 	height: 8vh;
 	margin-top: 1vh;
@@ -234,6 +259,7 @@ ul {
 .postData{
 	height: 40vh;
 	border: 2px solid rgba(53, 120, 229, 1);
+	word-wrap: break-word;
 }
 
 .postDate{
@@ -241,4 +267,20 @@ ul {
 	font-size: 6vh;
 	margin-top: 1vh;
 	margin-right: 2vh;
+}
+
+.charactersLeft{
+	float: left;
+	font-size: 6vh;
+	margin-top: 1vh;
+	margin-right: 2vh;
+	color: rgba(53, 120, 229, 1);
+}
+
+.charactersLeftError{
+	float: left;
+	font-size: 6vh;
+	margin-top: 1vh;
+	margin-right: 2vh;
+	color: rgba(255, 1, 1, 1);
 }
