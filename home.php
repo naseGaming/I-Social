@@ -32,10 +32,7 @@
 			<div id = "top-bar" >
 				<textarea id = "postText" class = "postText" rows = "4" cols = "50" placeholder = "Open up a discussion"></textarea>
 				<a>
-				<!-- 
-					<button id = "agreeBtn" class = "reactBtn" ><i id = "reacts" class="fas fa-thumbs-up"></i></button>
-					<button id = "disagreeBtn" class = "reactBtn2" ><i id = "reacts2" class="fas fa-thumbs-down"></i></button>
-				-->
+				<a id = "charactersLeft" class = "charactersLeft" >255</a>
 				<button id = "postBtn" class = "postBtn" >Post</button>
 				</a>
 			</div>
