@@ -40,7 +40,14 @@
 			if (password_verify($password, $hash)){
 				//checks if the user is logged out
 				if($status === 0){
-					echo $id."/".$first."/".$last;
+					$sql3 = mysqli_query($con,"UPDATE `users` SET `Status` = '1' where `Id` = '$id' ");
+
+					if($sql3){
+						echo $id."/".$first."/".$last;
+					}
+					else{
+						echo "Error Sql 3";
+					}
 				}
 				else{
 					//checks if the user device is already saved in the database
@@ -54,7 +61,14 @@
 
 						if($ip){
 							if($id == $login_id){
-								echo $id."/".$first."/".$last;
+								$sql3 = mysqli_query($con,"UPDATE `users` SET `Status` = '1' where `Id` = '$id' ");
+
+								if($sql3){
+									echo $id."/".$first."/".$last;
+								}
+								else{
+									echo "Error Sql 3";
+								}
 							}
 							//if non existent forces user to verify if it really is him
 							else{
@@ -68,6 +82,9 @@
 								echo "Verify";
 							//}
 						}
+					}
+					else{
+						echo "Error Sql 2";
 					}
 				}
 			}
