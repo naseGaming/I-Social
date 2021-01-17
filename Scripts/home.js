@@ -172,7 +172,6 @@ class HomeController{
 		$.when(model.newPostProcess(this._id, this.postData)).done(function (result){
 			if(result == "Success"){
 				view.clearNewPost();
-				
 			}
 			else{
 				view.logError(result);
@@ -226,8 +225,8 @@ class HomeController{
 			view.logError(result);
 		});
 		$.when(model.getPostsProcess(this._id)).done(function (result){
-			view.showPosts(result);
-		});
+				view.showPosts(result);
+			});
 	}
 }
 
