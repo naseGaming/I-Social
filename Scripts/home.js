@@ -221,12 +221,13 @@ class HomeController{
 	}
 
 	deletePost(model, view){
+		this._id = model.getIdProcess();
 		$.when(model.deletePostProcess(this.postId)).done(function (result){
 			view.logError(result);
 		});
 		$.when(model.getPostsProcess(this._id)).done(function (result){
-				view.showPosts(result);
-			});
+			view.showPosts(result);
+		});
 	}
 }
 
@@ -239,6 +240,8 @@ function deletePost(app){
 	var controller = new HomeController;
 
 	controller.postId = app.id;
+
+	controller.checkStatus(model, view);
 
 	controller.deletePost(model, view);
 }
