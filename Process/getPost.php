@@ -33,15 +33,22 @@
 						<button class = 'editBtn' id = ".$row2['Post_Id'].">
 							<i class='fas fa-edit'></i>
 						</button>
-						<button class = 'deleteBtn' id = ".$row2['Post_Id'].">
+						<button onClick = 'deletePost(this);' name = ".$row2['Post_Sender']." class = 'deleteBtn' id = ".$row2['Post_Id'].">
 							<i class='fas fa-trash'></i>
 						</button>
 					</div>
 					<div class = 'postData'>
 						".$row2['Post_Data']."
 					</div>
-					<button id = 'agreeBtn' class = 'reactBtn' ><i id = 'reacts' class='fas fa-thumbs-up'></i></button>
-					<button id = 'disagreeBtn' class = 'reactBtn2' ><i id = 'reacts2' class='fas fa-thumbs-down'></i></button><a class = 'postDate'>".$row2['Post_Date']."</a>
+					<button id = 'agreeBtn' class = 'reactBtn' >
+						<i id = 'reacts' class='fas fa-thumbs-up'></i></button>
+					<button id = 'disagreeBtn' class = 'reactBtn2' >
+						<i id = 'reacts2' class='fas fa-thumbs-down'></i>
+					</button>
+					<button id = 'replyBtn' class = 'replyBtn' >
+						<i id = 'reacts2' class='fas fa-reply-all'></i>
+					</button>
+					<a class = 'postDate'>".$row2['Post_Date']."</a>
 				</div>";
 			}
 		}
