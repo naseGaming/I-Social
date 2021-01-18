@@ -9,6 +9,7 @@
         <script src = "Scripts/jquery-3.1.1.min.js"></script>
         <script src = "Scripts/jquery-ui.min.js"></script>
 		<script src = "Scripts/home.js" ></script>
+		<script src = "Scripts/home-script.js" ></script>
 	</head>
 	<body>
 		<div id = "left-bar" >
