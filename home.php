@@ -30,6 +30,8 @@
 		</div>
 		<div>
 			<div id = "top-bar" >
+				<div id = "successPost">
+				</div>
 				<textarea id = "postText" class = "postText" rows = "4" cols = "50" placeholder = "Open up a discussion"></textarea>
 				<a>
 				<a id = "charactersLeft" class = "charactersLeft" >255</a>
