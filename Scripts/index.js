@@ -167,6 +167,19 @@ class Model{
 			}
 		});
 	}
+
+	saveActivity(id, data){
+        return $.ajax({
+			type: "POST",
+			url: '/ISocial/Process/activityHistory.php',
+			data: jQuery.param({ id: id, data: data }),
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			success: function (responses) {
+			},
+			error: function () {
+			}
+		});
+	}
 }
 
 class Controller{
@@ -218,6 +231,7 @@ class Controller{
 				window.sessionStorage.setItem('firstname', data[1]);
 				window.sessionStorage.setItem('lastname', data[2]);
                 view.login();
+				model.saveActivity(data[0], data[0]+"/Logged In");
             }
         });
 	}
