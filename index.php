@@ -11,6 +11,7 @@
         <script src = "Scripts/jquery-3.1.1.min.js"></script>
         <script src = "Scripts/jquery-ui.min.js"></script>
 		<script src = "Scripts/index.js" ></script>
+		<script src = "Scripts/index-script.js" ></script>
 	</head>
 	<body>
 		<div id ="body" >
