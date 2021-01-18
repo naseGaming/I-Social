@@ -64,12 +64,39 @@ function deleteButton(){
 
 //ajax for calling the login php file
 function loginProcess(loginUser, loginPass, code){
-    return $.ajax({
+    $.ajax({
         type: "POST",
         url: '/ISocial/Process/signIn.php',
         data: jQuery.param({ user: loginUser, pass: loginPass, code: code }),
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         success: function (responses) {
+            if (responses == "Pass") {
+                //incorrect password
+                logError("Incorrect Password!", "password");
+            }
+            else if (responses == "User") {
+                //username does not exist
+                 logError("Username does not exist!", "username");
+            }
+            else if(responses == "Error Sql 1") {
+                //internal error
+                internalError(responses);
+            }
+            else if(responses == "Verify"){
+                //verifies the user autenthicity
+                makeButton();
+                internalError("An Email is sent to you.");
+            }
+            else{
+                //succesful login
+                let data = responses.split("/");
+
+                window.sessionStorage.setItem('id', data[0]);
+                window.sessionStorage.setItem('firstname', data[1]);
+                window.sessionStorage.setItem('lastname', data[2]);
+                goLogin();
+                saveActivity(data[0], data[0]+"/Logged In");
+            }
         },
         error: function () {
         }
@@ -78,12 +105,29 @@ function loginProcess(loginUser, loginPass, code){
 
 //ajax for calling the register php file
 function registerProcess(user, pass, first, mid, last, email){
-    return $.ajax({
+    $.ajax({
         type: "POST",
         url: '/ISocial/Process/signUp.php',
         data: jQuery.param({ user: user, pass: pass, first: first, mid: mid, last: last, email: email }),
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        success: function (responses) {  
+        success: function (responses) { 
+            if(responses == "User" ){
+                //username already exist
+                error("Username Already Exist!", "regUser");
+            }
+            else if(responses == "Email"){
+                //email already exist
+                error("Email Already Exist!", "regEmail");
+            }
+            else if(responses == "Go"){
+                //succesful registration
+                noerror();
+                success("Registeration Complete!", "errR");
+            }
+            else{
+                //internal error
+                error(responses, "regUser");
+            } 
         },
         error: function () {
         }
@@ -91,17 +135,29 @@ function registerProcess(user, pass, first, mid, last, email){
 }
 
 //ajax for calling the verify User php file
-function verifyUserProcess(loginUser){
-    return $.ajax({
-        type: "POST",
-        url: '/ISocial/Process/verifyUser.php',
-        data: jQuery.param({ user: loginUser}),
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        success: function (responses) {
-        },
-        error: function () {
-         }
-    });
+function verifyUserProcess(loginUser, code){
+    let secureCode = sessionStorage.getItem('secureCode');
+    if(code == secureCode){
+        $.ajax({
+            type: "POST",
+            url: '/ISocial/Process/verifyUser.php',
+            data: jQuery.param({ user: loginUser}),
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            success: function (responses) {
+                if(responses == "Success"){
+                    deleteButton();
+                }
+                else{
+                    internalError(responses);
+                }
+            },
+            error: function () {
+             }
+        });
+    }
+    else{
+        internalError("Code didn't matched!");
+    }
 }
 
 function saveActivity(id, data){
@@ -113,62 +169,6 @@ function saveActivity(id, data){
         success: function (responses) {
         },
         error: function () {
-        }
-    });
-}
-
-//checks the values returned by the login php file
-function login(logUser, logPass, code){
-    $.when(loginProcess(logUser, logPass, code)).done(function (result) {
-        if (result == "Pass") {
-            //incorrect password
-            logError("Incorrect Password!", "password");
-        }
-        else if (result == "User") {
-            //username does not exist
-             logError("Username does not exist!", "username");
-        }
-        else if(result == "Error Sql 1") {
-            //internal error
-            internalError(result);
-        }
-        else if(result == "Verify"){
-            //verifies the user autenthicity
-            makeButton();
-            internalError("An Email is sent to you.");
-        }
-        else{
-            //succesful login
-            let data = result.split("/");
-
-            window.sessionStorage.setItem('id', data[0]);
-            window.sessionStorage.setItem('firstname', data[1]);
-            window.sessionStorage.setItem('lastname', data[2]);
-            goLogin();
-            saveActivity(data[0], data[0]+"/Logged In");
-        }
-    });
-}
-
-//checks the values returned by the register php file
-function register(regUser, regPass, regFirst, regMid, regLast, regEmail){
-    $.when(registerProcess(regUser, regPass, regFirst, regMid, regLast, regEmail)).done(function (result){
-        if(result == "User" ){
-            //username already exist
-            error("Username Already Exist!", "regUser");
-        }
-        else if(result == "Email"){
-            //email already exist
-            error("Email Already Exist!", "regEmail");
-        }
-        else if(result == "Go"){
-            //succesful registration
-            noerror();
-            success("Registeration Complete!", "errR");
-        }
-        else{
-            //internal error
-            error(result, "regUser");
         }
     });
 }
@@ -270,22 +270,4 @@ function codeGenerator(){
        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
-}
-
-//checks the values returned by verify User php file
-function verifyUser(logUser, code){y
-    let secureCode = sessionStorage.getItem('secureCode');
-    if(code == secureCode){
-        $.when(model.verifyUserProcess(logUser)).done(function (result) {
-            if(result == "Success"){
-                deleteButton();
-            }
-            else{
-                internalError(result);
-            }
-        });
-    }
-    else{
-        internalError("Wrong Code!");
-    }
 }
