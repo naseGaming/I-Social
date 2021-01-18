@@ -30,7 +30,7 @@ $(document).ready(function () {
         //checks if inputs are empty
         if(checkLogin(logUser, logPass)){
         	//calls the method for login
-        	login(logUser ,logPass, code);
+        	loginProcess(logUser ,logPass, code);
         }
     });
 
@@ -47,7 +47,7 @@ $(document).ready(function () {
         
         //calls the method for register
         if(checkInput(regUser, regPass, regConf, regFirst, regMid, regLast, regEmail)){
-        	register(regUser, regPass, regFirst, regMid, regLast, regEmail);
+        	registerProcess(regUser, regPass, regFirst, regMid, regLast, regEmail);
         }    
     });
 
@@ -56,6 +56,6 @@ $(document).ready(function () {
     	let code = document.getElementById("userCode").value;
 
     	//calls the method for verifying the user
-    	verifyUser(logUser, code);
+    	verifyUserProcess(logUser, code);
     });
 });
