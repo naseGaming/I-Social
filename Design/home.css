@@ -311,3 +311,20 @@ ul {
 	color: green;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
+.search-result{
+	text-align: left;
+	font-size: 5vh;
+	width: 100%;
+	background: rgba(255, 255, 255, 1);
+	color: rgba(53, 120, 229, 1);
+}
+
+.searchItems{
+	cursor: pointer;
+	width: 100%;
+}
+
+.searchItems:hover{
+	text-decoration: underline;
+}
