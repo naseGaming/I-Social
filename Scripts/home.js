@@ -27,4 +27,15 @@ $(document).ready(function () {
 
 		updateCharsLeft(postData);
 	});
+
+	$("#search").keyup(function(){
+    	let data = document.getElementById("search").value;
+
+    	if(searchData === ""){
+    		hideSearchResult();
+    	}
+    	else{
+    		searchData(data);
+    	}
+	});
 });
