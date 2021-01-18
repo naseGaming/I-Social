@@ -180,6 +180,10 @@ button{
 	width: 80%;
 	height: 30vh;
 	border: 2px solid black;
+	background-image: url(Resources/Default.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: center;
 }
 
 #userName{
