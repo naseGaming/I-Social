@@ -23,6 +23,7 @@
 
 		if($sql2){
 			while($row2=mysqli_fetch_assoc($sql2)){
+				$searchId = $row2['Id'];
 				$firstname = $row2['First_Name'];
 				$midname = $row2['Middle_Name'];
 				$lastname = $row2['Last_Name'];
@@ -44,14 +45,16 @@
 				}
 
 				if($searchResult){
-					echo "<a>
+					echo "<a class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."'>
 							".$firstname." ".$lastname."
 						</a>";
 				}
 			}
 
 			if($searchCounter <= 0){
-				echo "No Result Found!";
+				echo "<a class = 'searchItems' >
+				No Result Found!
+					</a>";
 			}
 		}
 		else{
