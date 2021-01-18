@@ -47,6 +47,8 @@
 				<i id = "search-icon" class="fas fa-search"></i>
 				<input type = "text" placeholder="Search" id = "search" class = "search" />
 			</a>
+			<div class = "search-result" id = "search-result" >
+			</div>
 		</div>
 	</body>
 </html>
