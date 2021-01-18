@@ -38,12 +38,21 @@ function hideSuccess(){
 	$("#successPost").hide();
 }
 
+function hideSearchResult(){
+	$("#search-result").slideUp();
+}
+
 function showSuccess(data){
 	document.getElementById("successPost").innerHTML = data;
 	$("#successPost").slideDown();
 	setTimeout(function(){ 
 		$("#successPost").slideUp(); 
 	}, 2000);
+}
+
+function showSearchResult(data){
+	document.getElementById("search-result").innerHTML = data;
+	$("#search-result").slideDown();
 }
 
 function showNameProcess(){
@@ -122,6 +131,19 @@ function reactPostProcess(postId, id, reaction){
 		type: "POST",
 		url: '/ISocial/Process/reactPost.php',
 		data: jQuery.param({ postId: postId, id: id, reaction: reaction }),
+		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		success: function (responses) {
+		},
+		error: function () {
+		}
+	});
+}
+
+function searchDataProcess(id, searchData){
+    return $.ajax({
+		type: "POST",
+		url: '/ISocial/Process/searchData.php',
+		data: jQuery.param({ id: id, searchData: searchData }),
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		success: function (responses) {
 		},
@@ -210,6 +232,7 @@ function updateCharsLeft(postData){
 
 function hideDivs(){
 	hideSuccess();
+	hideSearchResult();
 }
 
 //button functions
@@ -266,6 +289,23 @@ function disAgreePost(app){
 		}
 		else{
 			logError(result);
+		}
+	});
+}
+
+function searchData(data){
+	let id = getIdProcess();
+
+	$.when(searchDataProcess(id, data)).done(function (result){
+		if(result == "Error Sql 1"){
+			logError(result);
+		}
+		else if(result == "Error Sql 2"){
+			logError(result);
+		}
+		else{
+			showSearchResult(result);
+			saveActivity(id, "Searched for/"+data);
 		}
 	});
 }
