@@ -2,6 +2,7 @@ $(document).ready(function () {
 	let id = sessionStorage.getItem('id');
 
 	showName();
+	getNotifications();
 	getIdProcess();
 	getPosts();
 	hideDivs();
@@ -24,6 +25,10 @@ $(document).ready(function () {
 
     $("#left-profile").click(function () {
     	goProfile();
+	});
+
+    $("#left-newsfeed").click(function () {
+    	goNewsfeed();
 	});
 
 	$('#postText').keyup(function(){
