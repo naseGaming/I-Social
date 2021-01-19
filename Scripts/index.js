@@ -26,7 +26,6 @@ $(document).ready(function () {
         //gets code to use
         //puts the code to its right input box automatically
 		let code = sessionStorage.getItem('secureCode');
-        document.getElementById("userCode").value = code;
         //checks if inputs are empty
         if(checkLogin(logUser, logPass)){
         	//calls the method for login
