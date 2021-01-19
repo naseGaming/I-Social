@@ -55,6 +55,10 @@ function showSearchResult(data){
 	$("#search-result").slideDown();
 }
 
+function goToProfile(data){
+	location.href = "../ISocial/Profile.php?id="+data;
+}
+
 function showNameProcess(){
 	let firstname = sessionStorage.getItem('firstname');
 	let lastname = sessionStorage.getItem('lastname');
@@ -308,4 +312,10 @@ function searchData(data){
 			saveActivity(id, "Searched for/"+data);
 		}
 	});
+}
+
+function goProfile(){
+	let id = getIdProcess();
+
+	goToProfile(id);
 }
