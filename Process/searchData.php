@@ -7,6 +7,7 @@
 	$flag = false;
 	$searchResult = false;
 	$seemore = false;
+	$isFriend = false;
 	$searchCounter = 0;
 	$first = false;
 	$mid = false;
@@ -39,15 +40,12 @@
 
 				$firstname = strtolower($firstname);
 				$firstnamePieces = str_split($firstname, $length);
-				$firstnameLength = count($firstnamePieces);
 
 				$midname = strtolower($midname);
 				$midnamePieces = str_split($midname, $length);
-				$midnameLength = count($midnamePieces);
 
 				$lastname = strtolower($lastname);
 				$lastnamePieces = str_split($lastname, $length);
-				$lastnameLength = count($lastnamePieces);
 
 				if($searchData == $firstnamePieces[0]){
 					$searchCounter++;
@@ -74,9 +72,40 @@
 				}
 				else{
 					if($searchResult){
-						echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."'>
-							".$firstname." ".$lastname."
-						</div>";
+						if($searchId == $id){
+						}
+						else{
+							$isFriend = false;
+
+							$sql3 = mysqli_query($con,"SELECT * FROM `friends` where `User_Id` = '$searchId' or `Friend_User_Id` = '$searchId' ");
+
+
+							if($sql3){
+								while($row3=mysqli_fetch_assoc($sql3)){
+									$isFriend = true;
+									$status = $row3['Status'];
+								}
+							}
+
+
+							if($isFriend){
+								if($status == "Friend"){
+									echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."'>
+										 <i class='fas fa-user-friends'></i> ".$firstname." ".$lastname."
+									</div>";
+								}
+								else{
+									echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."'>
+										 <i id = '".$firstname." ".$lastname."' onClick = 'alreadyAdded(this);' class='fas fa-user-plus'></i> ".$firstname." ".$lastname."
+									</div>";
+								}
+							}
+							else{
+								echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."'>
+									<i id = '".$searchId."' onClick = 'addFriend(this);' class='fas fa-user-plus'></i> ".$firstname." ".$lastname."
+								</div>";
+							}
+						}
 					}
 				}
 			}
