@@ -17,7 +17,7 @@
 			<div id = "profilePicture">
 			</div>
 			<br>
-			<a id = "userName" >
+			<a id = "userName" onclick="goProfile();" >
 			</a>
 			<br>
 			<br>
@@ -29,8 +29,16 @@
 				<li class = "left-bar-items"><a class = "inactives" id = "left-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
 			</ul>
 		</div>
-		<div>
+		<div id = "post-bar">
 			<div id = "top-bar" >
+				<a>
+					<input type = "text" placeholder="Search" id = "search" class = "search" />
+					<i id = "search-icon" class="fas fa-search"></i>
+				</a>
+			</div>
+			<div class = "search-result" id = "search-result" >
+			</div>
+			<div id = "post-top-bar" >
 				<div id = "successPost">
 				</div>
 				<textarea id = "postText" class = "postText" rows = "4" cols = "50" placeholder = "Open up a discussion"></textarea>
@@ -43,12 +51,6 @@
 			</div>
 		</div>
 		<div id = "right-bar" >
-			<a>
-				<i id = "search-icon" class="fas fa-search"></i>
-				<input type = "text" placeholder="Search" id = "search" class = "search" />
-			</a>
-			<div class = "search-result" id = "search-result" >
-			</div>
 		</div>
 	</body>
 </html>
