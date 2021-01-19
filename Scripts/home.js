@@ -22,6 +22,10 @@ $(document).ready(function () {
     	}
 	});
 
+    $("#left-profile").click(function () {
+    	goProfile();
+	});
+
 	$('#postText').keyup(function(){
     	let postData = document.getElementById("postText").value;
 
@@ -31,7 +35,7 @@ $(document).ready(function () {
 	$("#search").keyup(function(){
     	let data = document.getElementById("search").value;
 
-    	if(searchData === ""){
+    	if(data == ""){
     		hideSearchResult();
     	}
     	else{
