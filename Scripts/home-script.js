@@ -59,6 +59,10 @@ function goToProfile(data){
 	location.href = "../ISocial/Profile.php?id="+data;
 }
 
+function goToNewsfeed(){
+	location.href = "../ISocial/Home.php";
+}
+
 function showNameProcess(){
 	let firstname = sessionStorage.getItem('firstname');
 	let lastname = sessionStorage.getItem('lastname');
@@ -156,10 +160,36 @@ function searchDataProcess(id, searchData){
 	});
 }
 
+function addFriendProcess(id, searchId){
+    return $.ajax({
+		type: "POST",
+		url: '/ISocial/Process/addFriend.php',
+		data: jQuery.param({ id: id, searchId: searchId }),
+		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		success: function (responses) {
+		},
+		error: function () {
+		}
+	});
+}
+
 function saveActivity(id, data){
     $.ajax({
 		type: "POST",
 		url: '/ISocial/Process/activityHistory.php',
+		data: jQuery.param({ id: id, data: data }),
+		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		success: function (responses) {
+		},
+		error: function () {
+		}
+	});
+}
+
+function notificationProcess(id, data){
+    return $.ajax({
+		type: "POST",
+		url: '/ISocial/Process/addNotif.php',
 		data: jQuery.param({ id: id, data: data }),
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		success: function (responses) {
@@ -318,4 +348,39 @@ function goProfile(){
 	let id = getIdProcess();
 
 	goToProfile(id);
+}
+
+function goNewsfeed(){
+
+	goToNewsfeed();
+}
+
+function addFriend(app){
+	let searchId = app.id;
+	let id = getIdProcess();
+
+	$.when(addFriendProcess(id, searchId, "Request")).done(function (result){
+		if(result == "Success"){
+			showSuccess("Added Successfully <i class='fas fa-check-circle'></i>");
+			saveActivity(id, "Added/"+searchId);
+			addNotif(searchId);
+		}
+		else{
+			logError(result);
+		}
+	});
+}
+
+function addNotif(searchId){
+	let id = getIdProcess();
+
+	$.when(notificationProcess(searchId, id+"/Added you")).done(function (result){
+		console.log(result);
+	});
+}
+
+function alreadyAdded(app){
+	let name = app.id;
+
+	showSuccess("You've already added "+name);
 }
