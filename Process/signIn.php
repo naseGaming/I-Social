@@ -51,16 +51,16 @@
 				}
 				else{
 					//checks if the user device is already saved in the database
-					$sql2 = mysqli_query($con,"SELECT * FROM `login_data` where `Ip_Address` = '$ipAdd' ");
+					$sql2 = mysqli_query($con,"SELECT * FROM `login_data` where `Users_Id` = '$id' ");
 
 					if($sql2){
 						while($row2 = mysqli_fetch_assoc($sql2)){
-							$login_id = $row2['Users_Id'];
+							$availAddress = $row2['Ip_Address'];
 							$ip = true;
 						}
 
 						if($ip){
-							if($id == $login_id){
+							if($ipAdd == $availAddress){
 								$sql3 = mysqli_query($con,"UPDATE `users` SET `Status` = '1' where `Id` = '$id' ");
 
 								if($sql3){
