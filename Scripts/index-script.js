@@ -82,20 +82,22 @@ function loginProcess(loginUser, loginPass, code){
                 //internal error
                 internalError(responses);
             }
-            else if(responses == "Verify"){
-                //verifies the user autenthicity
-                makeButton();
-                internalError("An Email is sent to you.");
-            }
             else{
                 //succesful login
-                let data = responses.split("/");
+                let data = responses.split("-");
+                if(data[0] == "2021"){
+                    makeButton();
+                    internalError("An Email is sent to you.");
+                }
+                else{
+                    let data = responses.split("/");
 
-                window.sessionStorage.setItem('id', data[0]);
-                window.sessionStorage.setItem('firstname', data[1]);
-                window.sessionStorage.setItem('lastname', data[2]);
-                goLogin();
-                saveActivity(data[0], data[0]+"/Logged In");
+                    window.sessionStorage.setItem('id', data[0]);
+                    window.sessionStorage.setItem('firstname', data[1]);
+                    window.sessionStorage.setItem('lastname', data[2]);
+                    goLogin();
+                    saveActivity(data[0], data[0]+"/Logged In");
+                }
             }
         },
         error: function () {
