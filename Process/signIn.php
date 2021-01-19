@@ -72,15 +72,13 @@
 							}
 							//if non existent forces user to verify if it really is him
 							else{
-								//if(sendMail($email, $code)){
-									echo "Verify";
-								//}
+								sendMail($email, $code);
+								echo "Verify";
 							}
 						}
 						else{
-							//if(sendMail($email, $code)){
-								echo "Verify";
-							//}
+							sendMail($email, $code);
+							echo "Verify";
 						}
 					}
 					else{
@@ -97,11 +95,22 @@
 		echo "Error Sql 1";
 	}
 
-	//function for sending mail(for future use)
+	//function for sending mail
 	function sendMail($email, $code){
 		$mail = new PHPMailer();
 
-		$mail->setFrom("isocialnoreply2021@gmail.com");
+		//Enable SMTP debugging.
+		$mail->SMTPDebug = 3;                               
+		//Set PHPMailer to use SMTP.
+		$mail->isSMTP();                    
+		$mail->Host = "smtp.gmail.com";
+		$mail->SMTPAuth = true;   
+		$mail->Username = "regacho800@gmail.com";       
+		$mail->Password = "dpqxnaegcaatxtan";
+		$mail->SMTPSecure = "tls";
+		$mail->Port = 587;  
+
+		$mail->setFrom("regacho800@gmail.com");
 
 		$mail->addAddress($email);
 
@@ -111,11 +120,8 @@
 
 		if (!$mail->send())
 		{
-		   echo $mail->ErrorInfo;
-		   return false;
 		}
 		else{
-			return true;
 		}
 	}
 ?>
