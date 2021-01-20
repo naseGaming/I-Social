@@ -63,6 +63,11 @@ function goToNewsfeed(){
 	location.href = "../ISocial/Home.php";
 }
 
+function showNotifCount(data, type){
+	document.getElementById("left-notifications").innerHTML = data;
+	$("#left-notifications").removeClass().addClass(type);
+}
+
 function showNameProcess(){
 	let firstname = sessionStorage.getItem('firstname');
 	let lastname = sessionStorage.getItem('lastname');
@@ -106,11 +111,11 @@ function newPostProcess(id, data){
 	});
 }
 
-function getPostsProcess(id){
+function getPostsProcess(id, data){
     $.ajax({
 		type: "POST",
 		url: '/ISocial/Process/getPost.php',
-		data: jQuery.param({ id: id}),
+		data: jQuery.param({ id: id, data: data}),
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
 		success: function (responses) {
 			showPosts(responses);
@@ -199,6 +204,32 @@ function notificationProcess(id, data){
 	});
 }
 
+function getNotifCountProcess(id){
+    return $.ajax({
+		type: "POST",
+		url: '/ISocial/Process/getNotifCount.php',
+		data: jQuery.param({ id: id }),
+		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		success: function (responses) {
+		},
+		error: function () {
+		}
+	});
+}
+
+function acceptFriendRequestProcess(friendId){
+    return $.ajax({
+		type: "POST",
+		url: '/ISocial/Process/acceptFriendRequest.php',
+		data: jQuery.param({ friendId: friendId }),
+		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		success: function (responses) {
+		},
+		error: function () {
+		}
+	});
+}
+
 function showName(){
 	let name = showNameProcess();
 
@@ -235,7 +266,8 @@ function newPost(postData){
 
 function getPosts(){
 	let id = getIdProcess();
-	getPostsProcess(id);
+	let data = "newsfeed";
+	getPostsProcess(id, data);
 }
 
 function verifyPostData(postData){
@@ -344,10 +376,43 @@ function searchData(data){
 	});
 }
 
-function goProfile(){
+function refreshSearchData(){
+	let data = document.getElementById("search").value;
 	let id = getIdProcess();
 
+	$.when(searchDataProcess(id, data)).done(function (result){
+		if(result == "Error Sql 1"){
+			logError(result);
+		}
+		else if(result == "Error Sql 2"){
+			logError(result);
+		}
+		else{
+			showSearchResult(result);
+			saveActivity(id, "Searched for/"+data);
+		}
+	});
+}
+
+function goProfile(){
+	let id = getIdProcess();
+	let name = showNameProcess();
+
+	alert(name);
+
+    window.sessionStorage.setItem('profileId', id);
+    window.sessionStorage.setItem('profileName', name);
 	goToProfile(id);
+}
+
+function goTo(app){
+	let id = app.id;
+
+    let data = id.split("/");
+
+    window.sessionStorage.setItem('profileId', data[0]);
+    window.sessionStorage.setItem('profileName', data[1]);
+	goToProfile(data[0]);
 }
 
 function goNewsfeed(){
@@ -363,7 +428,8 @@ function addFriend(app){
 		if(result == "Success"){
 			showSuccess("Added Successfully <i class='fas fa-check-circle'></i>");
 			saveActivity(id, "Added/"+searchId);
-			addNotif(searchId);
+			addNotif(searchId, id+"/Added you");
+			refreshSearchData();
 		}
 		else{
 			logError(result);
@@ -371,16 +437,45 @@ function addFriend(app){
 	});
 }
 
-function addNotif(searchId){
+function addNotif(searchId, data){
 	let id = getIdProcess();
 
-	$.when(notificationProcess(searchId, id+"/Added you")).done(function (result){
+	$.when(notificationProcess(searchId, data)).done(function (result){
 		console.log(result);
 	});
 }
 
-function alreadyAdded(app){
-	let name = app.id;
+function getNotifCount(){
+	let id = getIdProcess();
 
-	showSuccess("You've already added "+name);
+	$.when(getNotifCountProcess(id)).done(function (result){
+		if(result == "Error Sql 1"){
+			logError(result);
+		}
+		else{
+			if(result === "0"){
+				showNotifCount("<i class='fas fa-bell'></i> Notifications","inactives")
+			}
+			else{
+				showNotifCount("<i class='fas fa-bell'></i> "+result+" Notifications","actives")
+			}
+		}
+	});
+}
+
+function acceptFriendRequest(app){
+	let friendId = app.id;
+	let id = getIdProcess();
+
+	$.when(acceptFriendRequestProcess(friendId)).done(function (result){
+		if(result == "Success"){
+			showSuccess("Request Accepted!<i class='fas fa-check-circle'></i>");
+			saveActivity(id, "Friend Request Accepted/"+searchId);
+			addNotif(searchId, id+"/Accepted your friend request");
+			refreshSearchData();
+		}
+		else{
+			console.log(result);
+		}
+	});
 }
