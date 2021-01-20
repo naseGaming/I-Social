@@ -82,27 +82,47 @@
 
 							if($sql3){
 								while($row3=mysqli_fetch_assoc($sql3)){
-									$isFriend = true;
+									$Friend_Id = $row3['Friend_Id'];
+									$User_Id = $row3['User_Id'];
+									$Friend_User_Id = $row3['Friend_User_Id'];
 									$status = $row3['Status'];
+
+									if($Friend_User_Id == $id){
+										$isFriend = true;
+										break;
+									}
+									else{
+										if($User_Id == $id){
+											$isFriend = true;
+											break;
+										}
+									}
 								}
 							}
 
 
 							if($isFriend){
 								if($status == "Friend"){
-									echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."'>
-										 <i class='fas fa-user-friends'></i> ".$firstname." ".$lastname."
+									echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."/".$firstname." ".$lastname."'>
+										 <img class = 'searchUsersPicture' src = 'Design/Resources/Default.png' alt = '".$firstname."-".$lastname."' > ".$firstname." ".$lastname."
 									</div>";
 								}
 								else{
-									echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."'>
-										 <i id = '".$firstname." ".$lastname."' onClick = 'alreadyAdded(this);' class='fas fa-user-plus'></i> ".$firstname." ".$lastname."
-									</div>";
+									if($Friend_User_Id == $id){
+										echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."/".$firstname." ".$lastname."'>
+											 <img class = 'searchUsersPicture' src = 'Design/Resources/Default.png' alt = '".$firstname."-".$lastname."' > ".$firstname." ".$lastname." <a id = '".$Friend_Id."' class = 'responseRequest' onClick = 'rejectFriendRequest(this);' >Reject</a><a id = '".$Friend_Id."' class = 'responseRequest' onClick = 'acceptFriendRequest(this);' >Accept</a>
+										</div>";
+									}
+									else{
+										echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."/".$firstname." ".$lastname."'>
+											 <img class = 'searchUsersPicture' src = 'Design/Resources/Default.png' alt = '".$firstname."-".$lastname."' > ".$firstname." ".$lastname." <a class = 'responseRequest' >Request Sent</a>
+										</div>";
+									}
 								}
 							}
 							else{
-								echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."'>
-									<i id = '".$searchId."' onClick = 'addFriend(this);' class='fas fa-user-plus'></i> ".$firstname." ".$lastname."
+								echo "<div class = 'searchItems' onClick = 'goTo(this);' id = '".$searchId."/".$firstname." ".$lastname."'>
+									<img class = 'searchUsersPicture' src = 'Design/Resources/Default.png' alt = '".$firstname."-".$lastname."' > ".$firstname." ".$lastname."<a id = '".$searchId."' class = 'responseRequest' onClick = 'addFriend(this);' >Add Friend</a>
 								</div>";
 							}
 						}
