@@ -8,14 +8,12 @@
 		<script src="https://kit.fontawesome.com/8b6b1fa9e8.js" crossorigin="anonymous"></script>
         <script src = "Scripts/jquery-3.1.1.min.js"></script>
         <script src = "Scripts/jquery-ui.min.js"></script>
-		<script src = "Scripts/home.js" ></script>
-		<script src = "Scripts/home-script.js" ></script>
+		<script src = "Scripts/profile.js" ></script>
+		<script src = "Scripts/profile-script.js" ></script>
 	</head>
 	<body>
 		<div id = "left-bar" >
 			<br>
-			<!--<div id = "profilePicture">
-			</div> -->
 			<br>
 			<a id = "userName" onclick="goProfile();" >
 			</a>
