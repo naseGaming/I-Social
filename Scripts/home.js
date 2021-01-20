@@ -1,9 +1,7 @@
 $(document).ready(function () {
-	let id = sessionStorage.getItem('id');
 
 	showName();
-	getNotifications();
-	getIdProcess();
+	getNotifCount();
 	getPosts();
 	hideDivs();
 
